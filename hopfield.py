@@ -1,5 +1,4 @@
 #Sergio Alfonso Casillas Santoyo - A01424863
-#Red Hopfield para reconocer figuras en una matriz de M*N (8 x 5)
 
 import sys
 
@@ -15,7 +14,6 @@ else:
     objetivo = "x"
 
 
-# lee un archivo de 8x5 con 0 y 1, y lo regresa como vector de -1 y 1
 def leer(nombre):
     archivo = open("dataset/" + nombre + ".txt", "r")
     vector = []
@@ -54,12 +52,10 @@ def F(x, actual):
         return actual
 
 
-# leer patrones
 X = []
 for nombre in patrones:
     X.append(leer(nombre))
 
-# matriz de pesos T = suma de x^T x, con diagonal en 0
 T = []
 for i in range(n):
     fila = []
@@ -78,13 +74,11 @@ for p in range(len(X)):
     print(patrones[p])
     imprimir(X[p])
 
-# leer figura a reconocer
 U = leer(objetivo)
 t = 0
 print("U(" + str(t) + ") = " + objetivo)
 imprimir(U)
 
-# operacion sincrona hasta que U(t+1) = U(t)
 anteriores = [U]
 while True:
     nuevo = []
@@ -111,7 +105,6 @@ while True:
     anteriores.append(nuevo)
     U = nuevo
 
-# comparar el resultado con los patrones
 reconocido = "ninguno"
 for p in range(len(X)):
     if U == X[p]:
